@@ -1,4 +1,4 @@
-use bencher::{benchmark_group, benchmark_main, Bencher};
+use criterion::{criterion_group, criterion_main, Criterion, Bencher};
 use chrono::Utc;
 use ulid::{Ulid, Generator};
 
@@ -26,13 +26,17 @@ fn bench_from_string(b: &mut Bencher) {
     b.iter(|| Ulid::from_string(&s).unwrap());
 }
 
-benchmark_group!(
+fn bench(c: &mut Criterion) {
+    c.bench_function("bench_new", bench_new);
+    c.bench_function("bench_generator_generate", bench_generator_generate);
+    c.bench_function("bench_from_time", bench_from_time);
+    c.bench_function("bench_to_string", bench_to_string);
+    c.bench_function("bench_from_string", bench_from_string);
+}
+
+criterion_group!(
     ulid_perf,
-    bench_new,
-    bench_generator_generate,
-    bench_from_time,
-    bench_to_string,
-    bench_from_string
+    bench
 );
 
-benchmark_main!(ulid_perf);
+criterion_main!(ulid_perf);

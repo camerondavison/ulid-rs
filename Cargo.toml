@@ -18,7 +18,7 @@ lazy_static = "1.2"
 rand = "0.6"
 
 [dev-dependencies]
-bencher = "0.1"
+criterion = "0.2.9"
 
 [[bench]]
 name = "bench"
