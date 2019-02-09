@@ -1,5 +1,3 @@
-extern crate structopt;
-
 use std::io::{self, Write};
 use ulid::{Generator, Ulid};
 
